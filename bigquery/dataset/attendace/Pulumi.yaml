@@ -1,0 +1,25 @@
+name: bigquery-loader
+runtime: yaml
+description: Create BQ Dataset and Table
+
+resources:
+  # 1. Create the Dataset (Schema)
+  myDataset:
+    type: gcp:bigquery:Dataset
+    properties:
+      datasetId: "user_data_schema"
+      location: "US"
+
+  # 2. Create the Table
+  myTable:
+    type: gcp:bigquery:Table
+    properties:
+      datasetId: ${myDataset.datasetId}
+      tableId: "users"
+      deletionProtection: false
+      schema: |
+        [
+          {"name": "id", "type": "INTEGER", "mode": "REQUIRED"},
+          {"name": "name", "type": "STRING", "mode": "NULLABLE"},
+          {"name": "email", "type": "STRING", "mode": "NULLABLE"}
+        ]
