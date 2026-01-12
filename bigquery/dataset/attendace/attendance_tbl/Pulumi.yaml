@@ -1,0 +1,12 @@
+name: attendance-data-upload
+runtime: yaml
+
+resources:
+  # This command "talks" to the table you created in Phase 1
+  uploadAttendance:
+    type: command:local:Command
+    properties:
+      create: |
+        bq load --source_format=CSV --skip_leading_rows=1 \
+        workday_attendance.attendance_table \
+        ./data/attendance.csv

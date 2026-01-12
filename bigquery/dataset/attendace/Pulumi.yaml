@@ -1,25 +1,21 @@
-name: bigquery-loader
+name: workday-bq-schema
 runtime: yaml
-description: Create BQ Dataset and Table
+description: Creating a BigQuery table from a JSON schema file
 
 resources:
-  # 1. Create the Dataset (Schema)
-  myDataset:
+  # 1. Create the Dataset (The "Folder")
+  attendanceDataset:
     type: gcp:bigquery:Dataset
     properties:
-      datasetId: "user_data_schema"
-      location: "US"
+      datasetId: "wb-sanjay07-pr-70b795"
 
-  # 2. Create the Table
-  myTable:
+  # 2. Create the Table (The "File")
+  attendanceTable:
     type: gcp:bigquery:Table
     properties:
-      datasetId: ${myDataset.datasetId}
-      tableId: "users"
+      datasetId: ${attendanceDataset.datasetId}
+      tableId: "smb_attendance_tbl"
       deletionProtection: false
-      schema: |
-        [
-          {"name": "id", "type": "INTEGER", "mode": "REQUIRED"},
-          {"name": "name", "type": "STRING", "mode": "NULLABLE"},
-          {"name": "email", "type": "STRING", "mode": "NULLABLE"}
-        ]
+      # This is the "magic" line:
+      schema: 
+        fn::readFile: ./schema.json

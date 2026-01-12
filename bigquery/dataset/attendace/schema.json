@@ -1,2 +1,9 @@
-{"id": 1, "name": "Alice", "email": "alice@example.com"}
-{"id": 2, "name": "Bob", "email": "bob@example.com"}
+[
+  { "name": "WD_ID", "type": "STRING", "mode": "REQUIRED" },
+  { "name": "XID", "type": "STRING", "mode": "REQUIRED" },
+  { "name": "Name", "type": "STRING", "mode": "REQUIRED" },
+  { "name": "Team_Leader", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "Batch", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "STL", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "Status", "type": "STRING", "mode": "NULLABLE" }
+]
